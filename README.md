@@ -1,4 +1,55 @@
-# Getting Started with Create React App
+
+# Project Name
+
+**Author**: Dan Quinn
+**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+
+## Overview
+This is and advanced city finder that displays a map of whichever city the user types in.
+
+## Getting Started
+
+- build out the bones.
+
+- connect to api server
+
+- create functions that take in user data as well as ones that get and display information
+
+## Architecture
+
+I am going to use javascript components to build a site that has and input form. When the user types in the city a map will appear of the city.
+
+## Change Log
+
+05-15-2023 2:50 - Project start
+
+<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
+
+01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+
+## Credit and Collaborations
+<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+
+## Time Estimates
+For each of the lab features, make an estimate of the time it will take you to complete the feature, and record your start and finish times for that feature:
+
+Name of feature: ________________________________
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
+## White Boards and stuff
+
+
+
+
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -22,6 +22,7 @@ I am going to use javascript components to build a site that has and input form.
 ## Change Log
 
 05-15-2023 2:50 - Project start
+05-15-2023 3:02 - Deployed to netlify
 
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 

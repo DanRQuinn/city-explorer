@@ -28,22 +28,35 @@ I am going to use javascript components to build a site that has and input form.
 
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 
-## Credit and Collaborations
+## Credit and Collaborations and whiteboards
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+Monday:
+Arthur Fransisco
+![WB-1](./Whiteboard-1.png)
 
 ## Time Estimates
 For each of the lab features, make an estimate of the time it will take you to complete the feature, and record your start and finish times for that feature:
 
-Name of feature: 
+Name of feature: Map and long
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1 hour
 
-Start time: _____
+Start time: 2 30
 
-Finish time: _____
+Finish time: 6 00
 
-Actual time needed to complete: _____
+Actual time needed to complete: 3.5
 
+
+Name of feature: Map and long
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 2 30
+
+Finish time: 6 00
+
+Actual time needed to complete: 3.5
 ## White Boards and stuff
 
 

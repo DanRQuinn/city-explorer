@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Card } from 'react-bootstrap';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Button from 'react-bootstrap/Button'
 
 class App extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class App extends React.Component {
     try {
       let cityUrl = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.cityName}&format=json`;
       let city = await axios.get(cityUrl);
-      console.log(city);
+      // console.log(city);
       this.setState({
         Data1: city.data[0],
         error: false,
@@ -50,26 +51,30 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
     return (
       <>
-        <h1>Data from an API</h1>
-        <form onSubmit={this.handleCitySubmit}>
-          <label>
-            <input name="city" onChange={this.changeCityInput} />
-          </label>
-          <button type="submit">Explore!</button>
-        </form>
+        <header>
+          <h1>Data from an API</h1>
+          <form onSubmit={this.handleCitySubmit}>
+            <label>
+              <input name="city" onChange={this.changeCityInput} />
+            </label>
+            <Button type="submit" className="button">Explore!</Button>
+          </form>
+        </header>
         {this.state.error ? <p>{this.state.errorMessage}</p> :
           this.state.haveCityData &&
-          <Card className='City p-2 h-100%' style={{ width: '75%' }}>
-            <Card.Body>
-              <Card.Img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.Data1.lat},${this.state.Data1.lon}&zoom=12`} alt="" />
-              <Card.Title>{this.state.cityName}</Card.Title>
-              <Card.Text>Lat: {this.state.Data1.lat}</Card.Text>
-              <Card.Text>Lon: {this.state.Data1.lon}</Card.Text>
-            </Card.Body>
-          </Card>
+          <main>
+            <Card className='City p-2 h-100%' style={{ width: '75%' }}>
+              <Card.Body>
+                <Card.Img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.Data1.lat},${this.state.Data1.lon}&zoom=12`} alt="" />
+                <Card.Title>{this.state.cityName}</Card.Title>
+                <Card.Text>Lat: {this.state.Data1.lat}</Card.Text>
+                <Card.Text>Lon: {this.state.Data1.lon}</Card.Text>
+              </Card.Body>
+            </Card>
+          </main>
         }
       </>
     );

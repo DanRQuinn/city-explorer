@@ -3,6 +3,7 @@ import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button'
 
 class App extends React.Component {
   constructor(props) {
@@ -60,16 +61,16 @@ class App extends React.Component {
     console.log(this.state.cityData.lat);
     return (
       <>
-        <main>
-          <div >
-          <h1>CITY EXLPORER</h1>
+        <header>
+          <h1>CITY EXPLORER</h1>
           <form onSubmit={this.handleLocationSubmit}>
             <label>Search for a City!
-              <input name="city" onChange={this.changeCityInput} />
-            <button type="submit">Explore!</button>
+              <input name="city" style={{marginLeft:'8px'}}onChange={this.changeCityInput} />
+              <Button  type="submit">Explore!</Button>
             </label>
           </form>
-          </div>
+        </header>
+        <main>
           <Card className='City p-2 h-100%' style={{ width: '75%' }}>
             <Card.Body>
               <Card.Title className="title">{this.state.cityName}</Card.Title>

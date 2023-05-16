@@ -52,11 +52,21 @@ Name of feature: Map and long
 
 Estimate of time needed to complete: 1 hour
 
-Start time: 2 30
+Start time: 6 
 
-Finish time: 6 00
+Finish time: 7
 
-Actual time needed to complete: 3.5
+Name of feature: Error message
+
+Actual time needed to complete: 1
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 7
+
+Finish time: 8
+
+Actual time needed to complete: 1.5
 ## White Boards and stuff
 
 

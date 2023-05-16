@@ -1,5 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import Card from 'react-bootstrap/Card';
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -42,7 +45,6 @@ class App extends React.Component {
     this.setState({
       cityData: cityData.data[0]
     });
-    //  console.log(this.state.cityName);
   }
   changeCityInput = (e) => {
     this.setState({
@@ -51,8 +53,7 @@ class App extends React.Component {
   }
 
   render() {
-    let mapURL = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=12`
-
+console.log(this.state.cityData.lat);
     return (
       <>
         <h1>Data from an API</h1>
@@ -62,14 +63,17 @@ class App extends React.Component {
           </label>
           <button type="submit">Explore!</button>
         </form>
+        <Card className='City p-2 h-100%' style={{ width: '75%' }}>
+          <Card.Body>
+        <Card.Img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=12`} alt="" />
+            <Card.Title>{this.state.cityName}</Card.Title>
+            <Card.Text>Latitude: {this.state.cityData.lon}</Card.Text>
+            <Card.Text>Longitude: {this.state.cityData.lat}</Card.Text>
+          </Card.Body>
+        </Card>
       </>
     );
   }
 }
 
 export default App;
-
-
-
-
-

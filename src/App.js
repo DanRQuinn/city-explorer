@@ -3,6 +3,7 @@ import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button'
 
 class App extends React.Component {
   constructor(props) {
@@ -19,18 +20,22 @@ class App extends React.Component {
   //   event.preventDefault();
   //   try {
   //     //CHANGE THIS
-  //     let city = await axios.get(url);
+  //     let cityData = await axios.get(url);
+
+  //     // proof of life:
+  //     console.log(cityData.data);
+
   //     this.setState({
-  //       error: false
+  //       cityData: cityData.data[0]
+  //     });
+  //     //  console.log(this.state.cityName);
+  //   }
+
+  // changeCityInput = (e) => {
+  //     this.setState({
+  //       cityName: e.target.value
   //     });
   //   }
-  //   catch (error) {
-  //     this.setState({
-  //       error: true,
-  //       errorMessage: `An error Occured: ${error.response.status}`
-  //     });
-  //   }
-  // }
 
   handleLocationSubmit = async (e) => {
     e.preventDefault();
@@ -53,24 +58,28 @@ class App extends React.Component {
   }
 
   render() {
-console.log(this.state.cityData.lat);
+    console.log(this.state.cityData.lat);
     return (
       <>
-        <h1>Data from an API</h1>
-        <form onSubmit={this.handleLocationSubmit}>
-          <label>Search for a City!
-            <input name="city" onChange={this.changeCityInput} />
-          </label>
-          <button type="submit">Explore!</button>
-        </form>
-        <Card className='City p-2 h-100%' style={{ width: '75%' }}>
-          <Card.Body>
-        <Card.Img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=12`} alt="" />
-            <Card.Title>{this.state.cityName}</Card.Title>
-            <Card.Text>Latitude: {this.state.cityData.lon}</Card.Text>
-            <Card.Text>Longitude: {this.state.cityData.lat}</Card.Text>
-          </Card.Body>
-        </Card>
+        <header>
+          <h1>CITY EXPLORER</h1>
+          <form onSubmit={this.handleLocationSubmit}>
+            <label>Search for a City!
+              <input name="city" style={{marginLeft:'8px'}}onChange={this.changeCityInput} />
+              <Button  type="submit">Explore!</Button>
+            </label>
+          </form>
+        </header>
+        <main>
+          <Card className='City p-2 h-100%' style={{ width: '75%' }}>
+            <Card.Body>
+              <Card.Title className="title">{this.state.cityName}</Card.Title>
+              <Card.Img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=12`} alt={`Map of ${this.state.cityName}`} />
+              <Card.Text>Latitude: {this.state.cityData.lon}</Card.Text>
+              <Card.Text>Longitude: {this.state.cityData.lat}</Card.Text>
+            </Card.Body>
+          </Card>
+        </main>
       </>
     );
   }

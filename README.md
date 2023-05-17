@@ -2,7 +2,7 @@
 # Project Name
 
 **Author**: Dan Quinn
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 1.0.6 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
 This is and advanced city finder that displays a map of whichever city the user types in.
@@ -23,6 +23,7 @@ I am going to use javascript components to build a site that has and input form.
 
 05-15-2023 2:50 - Project start
 05-15-2023 3:02 - Deployed to netlify
+05-16-2023 9 02 - Deployed to netlify with api
 
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
@@ -58,8 +59,6 @@ Finish time: 7
 
 Name of feature: Error message
 
-Actual time needed to complete: 1
-
 Estimate of time needed to complete: 1 hour
 
 Start time: 7
@@ -67,6 +66,18 @@ Start time: 7
 Finish time: 8
 
 Actual time needed to complete: 1.5
+
+Name of feature: Connect to api
+
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 7
+
+Finish time: 9
+
+Actual time needed to complete: 2
+
 ## White Boards and stuff
 
 

@@ -4,6 +4,7 @@ import { Card } from 'react-bootstrap';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from 'react-bootstrap/Button'
+import Weather from './Weather.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class App extends React.Component {
       cityData: {},
       haveCityData: false,
       error: false,
-      errorMessage: ''
+      errorMessage: '',
+      weatherData: []
     }
   }
 
@@ -41,7 +43,36 @@ class App extends React.Component {
         errorMessage: `An error Occured: ${error.response.status}`
       });
     }
+    this.getWeather();
   }
+
+  handleForecast = async (e) => {
+    e.preventDefault();
+    let url = `${process.env.REACT_APP_SERVER}`;
+    let forecastData = await axios.get(url);
+    this.setState({
+      forecastData: forecastData.data
+    })
+  }
+
+  getWeather = async () => {
+    try {
+      // let { lat, lon } = this.state.Data1;
+      let weatherUrl = `http://localhost:3001/weather?cityData=${this.state.cityName}`;
+      let weatherResponse = await axios.get(weatherUrl);
+      let weatherData = weatherResponse.data;
+      console.log(weatherData);
+      let date = new Date(weatherData.dt * 1000).toLocaleDateString();
+      let description = weatherData[0].description;
+      this.setState({
+        weatherData
+      })
+      console.log('Date:', date);
+      console.log('Description:', description);
+    } catch (error) {
+      console.log('Error getting weather:', error);
+    }
+  };
 
 
   changeCityInput = (e) => {
@@ -49,7 +80,6 @@ class App extends React.Component {
       cityName: e.target.value
     });
   }
-
   render() {
     // console.log(this.state)
     return (
@@ -72,6 +102,10 @@ class App extends React.Component {
                 <Card.Title>{this.state.cityName}</Card.Title>
                 <Card.Text>Lat: {this.state.Data1.lat}</Card.Text>
                 <Card.Text>Lon: {this.state.Data1.lon}</Card.Text>
+                {this.state.weatherData.length > 0 && <Weather
+                  weatherData={this.state.weatherData}
+                  cityName={this.state.cityName}
+                />}
               </Card.Body>
             </Card>
           </main>

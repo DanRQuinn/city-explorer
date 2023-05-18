@@ -1,79 +1,144 @@
-'use strict';
+import React from 'react';
+import axios from 'axios';
+import { Card } from 'react-bootstrap';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Button from 'react-bootstrap/Button'
+import Weather from './Weather.js'
+import Movie from './Movie.js'
 
-//  REQUIRE
-
-require('dotenv').config();
-// let data = require('./data/weather.json');
-const express = require('express');
-const cors = require('cors');
-const axios = require('axios');
-
-//USE
-
-const app = express();
-
-
-//  PORT
-
-app.use(cors());
-const PORT = process.env.PORT || 3002;
-
-// ROUTES
-
-app.get('/weather', async (request, response, next) => {
-  try {
-    // let { lat, lon } = request.query;
-    // let searchQuery = request.query.cityData
-
-    let url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&units=I&days=5&lat=${request.query.lat}&lon=${request.query.lon}`
-
-    let weatherData = await axios.get(url);
-    let weatherMap = parseWeathers(weatherData.data);
-    weatherMap.then(weather => {
-      // console.log(weather);
-      response.status(200).send(weather);
-
-    })
-  } catch (error) {
-    next(error);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cityName: '',
+      cityData: {},
+      haveCityData: false,
+      error: false,
+      errorMessage: '',
+      weatherData: [],
+      movieData: [],
+      lat: '',
+      lon: ''
+    }
   }
-});
 
-// app.get('/movies', async (request, response, next) => {
-//   try {
-//     //https://api.themoviedb.org/3/movie/550?api_key=8b762b3c4924b64a719fa0e2c807aa50
-//     let movieURL = ``
-//   }
-// });
+  // WHEN DEALING WITH AXIOS YOU NEED 3 things:
+  // - 1) async
+  // - 2) await
+  // - 3) .data
+  handleCitySubmit = async (event) => {
+    event.preventDefault();
+    try {
+      let cityUrl = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.cityName}&format=json`;
+      let city = await axios.get(cityUrl);
+      this.setState({
+        Data1: city.data[0],
+        error: false,
+        haveCityData: true,
+        lat: city.data[0].lat,
+        lon: city.data[0].lon
+      });
+      this.getWeather(city.data[0].lat, city.data[0].lon);
+      this.getMovie();
+    }
+    catch (error) {
+      console.log('error: ', error);
+      console.log('error.message: ', error.message);
+      this.setState({
+        error: true,
+        errorMessage: `An error Occured: ${error.response.status}`
+      });
+    }
+  }
 
-function parseWeathers(weatherData) {
-  try {
-    const weatherSummarize = weatherData.data.map(oneDay => {
-      return new Forecast(oneDay);
+  getWeather = async (lat, lon) => {
+    try {
+      // let { lat, lon } = this.state.Data1;
+      let weatherUrl = `${process.env.REACT_APP_SERVER}/weather?cityData=${this.state.cityName}&lat=${lat}&lon=${lon}`;
+      let weatherResponse = await axios.get(weatherUrl);
+      // console.log(weatherResponse.data)
+      let weatherData = weatherResponse.data;
+      // let date = new Date(weatherData.dt * 1000).toLocaleDateString();
+      // let description = weatherData[0].description;
+      this.setState({
+        weatherData
+      })
+      // console.log('Date:', date);
+      // console.log('Description:', description);
+    } catch (error) {
+      console.log('Error getting weather: ', error);
+    }
+  };
+
+  getMovie = async () => {
+    let movieURL = `${process.env.REACT_APP_SERVER}/movies?cityName=${this.state.cityName}`;
+    console.log(movieURL);
+    try {
+      let movieResponse = await axios.get(movieURL);
+      console.log(movieResponse.data)
+
+      this.setState({
+        movieData: movieResponse.data
+      })
+
+    } catch (error) {
+      console.log('Error getting movie: ', error);
+    }
+  };
+
+
+
+  changeCityInput = (e) => {
+    this.setState({
+      cityName: e.target.value
     });
-    return Promise.resolve(weatherSummarize)
-  } catch (error) {
-    return Promise.reject(error);
+  }
+  render() {
+    // console.log(this.state.weatherData)
+    return (
+      <>
+        <header>
+          <h1>Data from an API</h1>
+          <form onSubmit={this.handleCitySubmit}>
+            <label>
+              <input name="city" onChange={this.changeCityInput} />
+            </label>
+            <Button type="submit" className="button">Explore!</Button>
+          </form>
+        </header>
+        {this.state.error ? <p>{this.state.errorMessage}</p> :
+          this.state.haveCityData &&
+          <main>
+            <Card className='City p-2 h-100%' style={{ width: '75%' }}>
+              <Card.Body>
+                <Card.Img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.Data1.lat},${this.state.Data1.lon}&zoom=12`} alt="" />
+                <Card.Title>{this.state.cityName}</Card.Title>
+                <Card.Text>Lat: {this.state.Data1.lat}</Card.Text>
+                <Card.Text>Lon: {this.state.Data1.lon}</Card.Text>
+                {this.state.weatherData.length > 0 && <Weather
+                  weatherData={this.state.weatherData}
+                  cityName={this.state.cityName}
+                />}
+                {this.state.movieData.length > 0 && <Movie
+                  movieData={this.state.movieData}
+
+                />}
+              </Card.Body>
+            </Card>
+            {/* {this.state.weatherData ? (
+              this.state.weatherData.map(day => (
+                <h1>{day.date}</h1>
+              ))
+            ) : (
+              <p>loading weather data</p>
+            )
+            } */}
+          </main>
+        }
+      </>
+    );
   }
 }
 
-// TRUST SHEYNA IT WORKS
-
-app.get('*', (request, response) => {
-  response.send('The thing you are looking for doesn\'t exist');
-});
-
-// CLASSES
-
-class Forecast {
-  constructor(day) {
-    this.date = day.valid_date;
-    this.description = day.weather.description;
-    this.high = day.high_temp;
-    this.low = day.low_temp;
-  }
-}
-
-// LISTEN 
-
-app.listen(PORT, () => console.log(`listening on ${PORT}`));
+export default App;

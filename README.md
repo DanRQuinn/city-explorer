@@ -78,6 +78,36 @@ Finish time: 9
 
 Actual time needed to complete: 2
 
+ame of feature: Weather
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 1 30
+
+Finish time: 430
+
+Actual time needed to complete: 3
+
+Name of feature: Movies
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 4 30
+
+Finish time:  9
+
+Actual time needed to complete: 4.5
+
+Name of feature: Publish
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 9
+
+Finish time: 10
+
+Actual time needed to complete: 1N
+
 ## White Boards and stuff
 
 

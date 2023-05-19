@@ -1,12 +1,12 @@
 header {
   text-align: center;
-  background-color: rgb(0, 131, 116);
+  background-color:rgb(18, 76, 131);
   padding-bottom: 3rem;
 }
 
 
 main {
-  background-color: rgb(0, 219, 194);
+  background-color:rgb(33, 88, 133);
   padding-top: 3rem;
   padding-bottom: 3rem;
   display: flex;
@@ -21,6 +21,7 @@ main {
   height: auto;
   padding: 1rem;
   max-width: 500px;
+  text-align: center;
 }
 
 .City img {
@@ -30,15 +31,25 @@ main {
 
 card-body {
   background-color: rgba(0, 219, 193, 0.208);
-
 }
 
 
 label {
   display: flex;
   flex-direction: row;
+  margin: 1rem;
 }
 
 title {
   text-align: center;
+}
+
+.weatherDay {
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.movieDay {
+  margin: 1rem;
+  padding: 1rem;
 }

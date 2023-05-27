@@ -59,8 +59,6 @@ class App extends React.Component {
       let weatherResponse = await axios.get(weatherUrl);
       // console.log(weatherResponse.data)
       let weatherData = weatherResponse.data;
-      // let date = new Date(weatherData.dt * 1000).toLocaleDateString();
-      // let description = weatherData[0].description;
       this.setState({
         weatherData
       })
@@ -110,19 +108,18 @@ class App extends React.Component {
         {this.state.error ? <p>{this.state.errorMessage}</p> :
           this.state.haveCityData &&
           <main>
-            <Card className='City p-2 h-100%' style={{ width: '75%' }}>
+            <Card className='City' style={{ width: '75%' }}>
               <Card.Body>
                 <Card.Img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.Data1.lat},${this.state.Data1.lon}&zoom=12`} alt="" />
                 <Card.Title>{this.state.cityName}</Card.Title>
                 <Card.Text>Lat: {this.state.Data1.lat}</Card.Text>
                 <Card.Text>Lon: {this.state.Data1.lon}</Card.Text>
-                {this.state.weatherData.length > 0 && <Weather
+                < Weather
                   weatherData={this.state.weatherData}
                   cityName={this.state.cityName}
-                />}
+                />
                 {this.state.movieData.length > 0 && <Movie
                   movieData={this.state.movieData}
-
                 />}
               </Card.Body>
             </Card>

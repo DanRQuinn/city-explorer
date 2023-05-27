@@ -6,12 +6,12 @@ class WeatherDay extends React.Component {
     return (
       <>
         {this.props.weatherData ? (
-          this.props.weatherData.map((forecast, idx) =>
+          this.props.weatherData.map((day, idx) =>
             <Card key={idx} className="weatherDay">
-              <Card.Text>Date: {forecast.date}</Card.Text>
-              <Card.Text>Forecast: {forecast.description}</Card.Text>
-              <Card.Text>High of: {forecast.high}</Card.Text>
-              <Card.Text>Low of: {forecast.low}</Card.Text>
+              <Card.Text>Date: {day.time}</Card.Text>
+              <Card.Text>Forecast: {day.forecast}</Card.Text>
+              <Card.Text>High of: {day.high}</Card.Text>
+              <Card.Text>Low of: {day.low}</Card.Text>
               {/* <hr></hr> */}
             </Card>
           )

@@ -32,4 +32,3 @@ class MovieDay extends React.Component {
 }
 
 export default MovieDay;
-
